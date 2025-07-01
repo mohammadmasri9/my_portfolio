@@ -20,14 +20,17 @@ import {
   Grid
 } from '@mui/material';
 import { styled } from '@mui/system';
-import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import MenuIcon from '@mui/icons-material/Menu';
+
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import CodeIcon from '@mui/icons-material/Code';
+import LaunchIcon from '@mui/icons-material/Launch';
 import profilePhoto from '../src/assets/Pictures/photo.jpg';
 import OoredooLogo from '../src/assets/Pictures/ooredoo.svg';
 import AlQudsLogo from '../src/assets/Pictures/aqu.png';
@@ -95,23 +98,19 @@ const ContactButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// Slide Container for fullpage scrolling
-const SlideContainer = styled(Box)(({ theme }) => ({
-  height: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
+// Section Container for normal scrolling
+const SectionContainer = styled(Box)(({ theme }) => ({
+  minHeight: '100vh',
+  padding: theme.spacing(12, 0, 8, 0),
   position: 'relative',
-  overflow: 'hidden',
 }));
 
-// Home Slide Styles
+// Home Section Styles
 const MainSection = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '100%',
+  minHeight: '100vh',
   padding: theme.spacing(4, 0),
   gap: theme.spacing(8),
   maxWidth: '1400px',
@@ -200,15 +199,181 @@ const ProfileImage = styled('img')(({ theme }) => ({
   display: 'block',
 }));
 
-// Experience Slide Styles
-const ExperienceSection = styled(Box)(({ theme }) => ({
-  height: '100vh',
-  backgroundColor: '#ffffff',
-  padding: theme.spacing(8, 0),
+// About Me Section Styles
+const AboutContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: theme.spacing(8),
+  maxWidth: '1400px',
+  margin: '0 auto',
+  [theme.breakpoints.down('lg')]: {
+    flexDirection: 'column',
+    gap: theme.spacing(4),
+  },
+}));
+
+const AboutImageContainer = styled(Box)(({ theme }) => ({
+  flex: '1 1 40%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'relative',
+  maxWidth: 400,
+  [theme.breakpoints.down('lg')]: {
+    order: 1,
+    maxWidth: 350,
+  },
+}));
+
+const AboutContentBox = styled(Box)(({ theme }) => ({
+  flex: '1 1 60%',
+  maxWidth: 600,
+  [theme.breakpoints.down('lg')]: {
+    order: 2,
+    textAlign: 'center',
+  },
+}));
+
+const AboutImageWrapper = styled(Box)(({ theme }) => ({
+  position: 'relative',
+  width: 350,
+  height: 400,
+  borderRadius: 24,
+  overflow: 'hidden',
+  background: 'linear-gradient(135deg, rgba(91, 61, 246, 0.1), rgba(59, 130, 246, 0.1))',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(135deg, rgba(91, 61, 246, 0.05), rgba(59, 130, 246, 0.05))',
+    zIndex: 1,
+  },
+  [theme.breakpoints.down('md')]: {
+    width: 300,
+    height: 350,
+  },
+}));
+
+const AboutProfileImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center center',
+  position: 'relative',
+  zIndex: 0,
+}));
+
+// Portfolio Card Styles with fixed heights
+const PortfolioCard = styled(Card)(({ theme }) => ({
+  borderRadius: theme.spacing(3),
+  border: '1px solid rgba(91, 61, 246, 0.1)',
+  boxShadow: '0 8px 32px rgba(91, 61, 246, 0.08)',
+  transition: 'all 0.3s ease',
+  position: 'relative',
+  overflow: 'hidden',
+  background: '#ffffff',
+  height: 400, // Fixed height for all cards
   display: 'flex',
   flexDirection: 'column',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0 16px 48px rgba(91, 61, 246, 0.15)',
+    borderColor: 'rgba(91, 61, 246, 0.2)',
+  },
+}));
+
+// Certificate Card with smaller fixed height
+const CertificateCard = styled(Card)(({ theme }) => ({
+  borderRadius: theme.spacing(3),
+  border: '1px solid rgba(91, 61, 246, 0.1)',
+  boxShadow: '0 8px 32px rgba(91, 61, 246, 0.08)',
+  transition: 'all 0.3s ease',
+  position: 'relative',
+  overflow: 'hidden',
+  background: '#ffffff',
+  height: 320, // Fixed height for certificate cards
+  display: 'flex',
+  flexDirection: 'column',
+  '&:hover': {
+    transform: 'translateY(-8px)',
+    boxShadow: '0 16px 48px rgba(91, 61, 246, 0.15)',
+    borderColor: 'rgba(91, 61, 246, 0.2)',
+  },
+}));
+
+const ProjectImageContainer = styled(Box)(({ theme }) => ({
+  width: '100%',
+  height: 200,
+  background: 'linear-gradient(135deg, rgba(91, 61, 246, 0.1), rgba(59, 130, 246, 0.1))',
+  display: 'flex',
+  alignItems: 'center',
   justifyContent: 'center',
-  overflow: 'auto',
+  position: 'relative',
+  overflow: 'hidden',
+  border: '2px dashed rgba(91, 61, 246, 0.2)',
+  borderBottom: 'none',
+  flexShrink: 0, // Prevent shrinking
+}));
+
+const CertificateImageContainer = styled(Box)(({ theme }) => ({
+  width: '100%',
+  height: 150,
+  background: 'linear-gradient(135deg, rgba(91, 61, 246, 0.1), rgba(59, 130, 246, 0.1))',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'relative',
+  overflow: 'hidden',
+  border: '2px dashed rgba(91, 61, 246, 0.2)',
+  borderBottom: 'none',
+  flexShrink: 0, // Prevent shrinking
+}));
+
+const ProjectImage = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  objectPosition: 'center',
+}));
+
+const ViewButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  color: '#5b3df6',
+  borderRadius: theme.spacing(1),
+  padding: theme.spacing(0.5, 1.5),
+  fontSize: '0.875rem',
+  fontWeight: 600,
+  textTransform: 'none',
+  border: '1px solid rgba(91, 61, 246, 0.2)',
+  transition: 'all 0.3s ease',
+  marginTop: 'auto', // Push to bottom
+  '&:hover': {
+    backgroundColor: '#5b3df6',
+    color: '#fff',
+    borderColor: '#5b3df6',
+  },
+}));
+
+const GithubButton = styled(Button)(({ theme }) => ({
+  backgroundColor: '#24292e',
+  color: '#fff',
+  borderRadius: theme.spacing(2),
+  padding: theme.spacing(1.5, 4),
+  fontSize: '1rem',
+  fontWeight: 600,
+  textTransform: 'none',
+  boxShadow: '0 4px 15px rgba(36, 41, 46, 0.3)',
+  marginTop: theme.spacing(4),
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#1b1f23',
+    boxShadow: '0 6px 20px rgba(36, 41, 46, 0.4)',
+    transform: 'translateY(-2px)',
+  },
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
@@ -227,9 +392,9 @@ const SectionSubtitle = styled(Typography)(({ theme }) => ({
   fontSize: '1.2rem',
   color: theme.palette.text.secondary,
   textAlign: 'center',
-  marginBottom: theme.spacing(4),
+  marginBottom: theme.spacing(6),
   maxWidth: 600,
-  margin: `0 auto ${theme.spacing(4)}px auto`,
+  margin: `0 auto ${theme.spacing(6)}px auto`,
   lineHeight: 1.6,
 }));
 
@@ -294,6 +459,17 @@ const MainTitle = styled(Typography)(({ theme }) => ({
   fontSize: 'clamp(2rem, 5vw, 3.5rem)',
 }));
 
+const AboutTitle = styled(Typography)(({ theme }) => ({
+  fontSize: 'clamp(2rem, 4vw, 2.5rem)',
+  fontWeight: 800,
+  marginBottom: theme.spacing(3),
+  color: theme.palette.text.primary,
+  letterSpacing: '-0.02em',
+  [theme.breakpoints.down('lg')]: {
+    textAlign: 'center',
+  },
+}));
+
 const HighlightSpan = styled('span')({
   background: 'linear-gradient(135deg, #5b3df6, #3b82f6)',
   WebkitBackgroundClip: 'text',
@@ -307,6 +483,17 @@ const InfoText = styled(Typography)(({ theme }) => ({
   fontWeight: 500,
   color: theme.palette.text.secondary,
   marginBottom: theme.spacing(1),
+}));
+
+const AboutText = styled(Typography)(({ theme }) => ({
+  fontSize: '1.1rem',
+  lineHeight: 1.7,
+  color: theme.palette.text.secondary,
+  marginBottom: theme.spacing(2.5),
+  textAlign: 'justify',
+  [theme.breakpoints.down('lg')]: {
+    textAlign: 'center',
+  },
 }));
 
 const CTAButton = styled(Button)(({ theme }) => ({
@@ -361,7 +548,6 @@ const HomePage = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [currentSlide, setCurrentSlide] = React.useState(0);
 
   const name = "Mohammad Almasri";
   const titleHighlight = "Full Stack Developer";
@@ -372,7 +558,7 @@ const HomePage = () => {
     linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a"
   };
 
-  const navItems = ['Home', 'Experience', 'Portfolio', 'About me'];
+  const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
 
   const experiences = [
     {
@@ -420,42 +606,96 @@ const HomePage = () => {
     }
   ];
 
-  // Scroll handling for fullpage effect
-  React.useEffect(() => {
-    let isScrolling = false;
-    
-    const handleScroll = (e) => {
-      if (isScrolling) return;
-      
-      isScrolling = true;
-      setTimeout(() => { isScrolling = false; }, 1000);
-      
-      if (e.deltaY > 0 && currentSlide < 1) {
-        setCurrentSlide(1);
-      } else if (e.deltaY < 0 && currentSlide > 0) {
-        setCurrentSlide(0);
-      }
-    };
+  const projects = [
+    {
+      name: 'Uniconnect',
+      description: 'A comprehensive platform connecting university students with opportunities, resources, and networking capabilities.',
+      technologies: ['React', 'Node.js', 'MongoDB', 'Express'],
+      status: 'Completed',
+      type: 'Web Application',
+      image: null
+    },
+    {
+      name: 'SKLR',
+      description: 'An innovative learning management system designed to enhance educational experiences and streamline course management.',
+      technologies: ['React', 'Django', 'PostgreSQL', 'Python'],
+      status: 'Completed',
+      type: 'Educational Platform',
+      image: null
+    },
+    {
+      name: 'My Portfolio',
+      description: 'A modern, responsive portfolio website showcasing my projects, skills, and professional experience.',
+      technologies: ['React', 'Material-UI', 'JavaScript', 'CSS'],
+      status: 'Completed',
+      type: 'Portfolio Website',
+      image: null
+    }
+  ];
 
-    window.addEventListener('wheel', handleScroll, { passive: false });
-    return () => window.removeEventListener('wheel', handleScroll);
-  }, [currentSlide]);
+  const certificates = [
+    {
+      name: 'Use Canva to Create Desktop and Mobile-friendly Web Pages',
+      issuer: 'Coursera',
+      category: 'Web Design',
+      year: '2024',
+      image: null
+    },
+    {
+      name: 'Create a no-code responsive website with Webflow',
+      issuer: 'Coursera',
+      category: 'Web Development',
+      year: '2024',
+      image: null
+    },
+    {
+      name: 'Getting Started with Microsoft PowerPoint',
+      issuer: 'Microsoft',
+      category: 'Professional Skills',
+      year: '2023',
+      image: null
+    },
+    {
+      name: 'Create a Resume and Cover Letter with Word',
+      issuer: 'Microsoft',
+      category: 'Professional Skills',
+      year: '2023',
+      image: null
+    },
+    {
+      name: 'Professional Communication in English',
+      issuer: 'Professional Development',
+      category: 'Communication',
+      year: '2023',
+      image: null
+    },
+    {
+      name: 'Cybersecurity Fundamentals',
+      issuer: 'Professional Development',
+      category: 'Security',
+      year: '2023',
+      image: null
+    }
+  ];
 
   const handleSocialClick = (platform) => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
   };
 
-  const scrollToSlide = (slideIndex) => {
-    setCurrentSlide(slideIndex);
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
-    <Box sx={{ height: '100vh', overflow: 'hidden' }}>
+    <Box>
       {/* Navigation Bar */}
       <StyledAppBar elevation={0}>
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
-            <LogoContainer onClick={() => scrollToSlide(0)}>
+            <LogoContainer onClick={() => scrollToSection('home')}>
               <LogoText>MA</LogoText>
               <Typography 
                 variant="h6" 
@@ -474,11 +714,12 @@ const HomePage = () => {
               {navItems.map((item, index) => (
                 <NavButton 
                   key={item}
-                  onClick={() => scrollToSlide(item === 'Home' ? 0 : 1)}
-                  sx={{
-                    color: (item === 'Home' && currentSlide === 0) || 
-                           (item === 'Experience' && currentSlide === 1) ? '#5b3df6' : 'inherit'
-                  }}
+                  onClick={() => scrollToSection(
+                    item === 'Home' ? 'home' : 
+                    item === 'Experience' ? 'experience' : 
+                    item === 'About me' ? 'about' : 
+                    item === 'Portfolio' ? 'portfolio' : 'home'
+                  )}
                 >
                   {item}
                 </NavButton>
@@ -492,206 +733,256 @@ const HomePage = () => {
         </Container>
       </StyledAppBar>
 
-      {/* Slides Container */}
-      <Box 
-        sx={{ 
-          transform: `translateY(-${currentSlide * 100}vh)`,
-          transition: 'transform 1s ease-in-out',
-          height: '200vh'
-        }}
-      >
-        {/* Slide 1: Home */}
-        <SlideContainer sx={{ bgcolor: '#f7fbff' }}>
-          <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
-            <MainSection>
-              <ContentBox>
-                <GreetingText>
-                  Hey, I am {name} 👋
-                </GreetingText>
-                
-                <MainTitle>
-                  I am a <HighlightSpan>{titleHighlight}</HighlightSpan>
-                  <br />
-                  creating impactful digital experiences
-                </MainTitle>
-                
-                <InfoText>
-                  <strong>Dual Studies Information Technology Student</strong>
-                  <br />
-                  Al-Quds University
-                </InfoText>
-                
-                <InfoText sx={{ mb: 3 }}>
-                  Specializing in modern web applications using React, Node.js, and cutting-edge technologies.
-                </InfoText>
+      {/* Section 1: Home */}
+      <SectionContainer id="home" sx={{ bgcolor: '#f7fbff' }}>
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+          <MainSection>
+            <ContentBox>
+              <GreetingText>
+                Hey, I am {name} 👋
+              </GreetingText>
+              
+              <MainTitle>
+                I am a <HighlightSpan>{titleHighlight}</HighlightSpan>
+                <br />
+                creating impactful digital experiences
+              </MainTitle>
+              
+              <InfoText>
+                <strong>Dual Studies Information Technology Student</strong>
+                <br />
+                Al-Quds University
+              </InfoText>
+              
+              <InfoText sx={{ mb: 3 }}>
+                Specializing in modern web applications using React, Node.js, and cutting-edge technologies.
+              </InfoText>
 
-                <Box sx={{ display: 'flex', gap: 3, mt: 3, justifyContent: 'center' }}>
-                  <ModernSocialButton 
-                    platform="linkedin"
-                    onClick={() => handleSocialClick('linkedin')}
-                  >
-                    <SocialIconContainer platform="linkedin">
-                      <LinkedInIcon sx={{ color: '#fff', fontSize: 24 }} />
-                    </SocialIconContainer>
-                    <Typography variant="caption">Connect with me</Typography>
-                  </ModernSocialButton>
-                  
-                  <ModernSocialButton 
-                    platform="github"
-                    onClick={() => handleSocialClick('github')}
-                  >
-                    <SocialIconContainer platform="github">
-                      <GitHubIcon sx={{ color: '#fff', fontSize: 24 }} />
-                    </SocialIconContainer>
-                    <Typography variant="caption">Reach me on GitHub</Typography>
-                  </ModernSocialButton>
-                </Box>
+              <Box sx={{ display: 'flex', gap: 3, mt: 3, justifyContent: 'center' }}>
+                <ModernSocialButton 
+                  platform="linkedin"
+                  onClick={() => handleSocialClick('linkedin')}
+                >
+                  <SocialIconContainer platform="linkedin">
+                    <LinkedInIcon sx={{ color: '#fff', fontSize: 24 }} />
+                  </SocialIconContainer>
+                  <Typography variant="caption">Connect with me</Typography>
+                </ModernSocialButton>
                 
-                <CTAButton onClick={() => scrollToSlide(1)}>
-                  View My Experience
-                </CTAButton>
-              </ContentBox>
+                <ModernSocialButton 
+                  platform="github"
+                  onClick={() => handleSocialClick('github')}
+                >
+                  <SocialIconContainer platform="github">
+                    <GitHubIcon sx={{ color: '#fff', fontSize: 24 }} />
+                  </SocialIconContainer>
+                  <Typography variant="caption">Reach me on GitHub</Typography>
+                </ModernSocialButton>
+              </Box>
+              
+              <CTAButton onClick={() => scrollToSection('experience')}>
+                View My Experience
+              </CTAButton>
+            </ContentBox>
 
-              <ImageContainer>
-                <DecorativeContainer>
-                  <ProfileImageContainer>
-                    <ProfileImage 
-                      src={profileImageUrl} 
-                      alt={`${name} - Full Stack Developer`}
-                    />
-                  </ProfileImageContainer>
-                </DecorativeContainer>
-              </ImageContainer>
-            </MainSection>
-          </Container>
-        </SlideContainer>
+            <ImageContainer>
+              <DecorativeContainer>
+                <ProfileImageContainer>
+                  <ProfileImage 
+                    src={profileImageUrl} 
+                    alt={`${name} - Full Stack Developer`}
+                  />
+                </ProfileImageContainer>
+              </DecorativeContainer>
+            </ImageContainer>
+          </MainSection>
+        </Container>
+      </SectionContainer>
 
-        {/* Slide 2: Experience */}
-        <SlideContainer>
-          <ExperienceSection>
-            <Container maxWidth="lg">
-              <SectionTitle>
-                My Experience
-              </SectionTitle>
-              <SectionSubtitle>
-                A journey through my professional development and educational achievements
-              </SectionSubtitle>
+      {/* Section 2: Experience */}
+      <SectionContainer id="experience" sx={{ bgcolor: '#ffffff' }}>
+        <Container maxWidth="lg">
+          <SectionTitle>
+            My Experience
+          </SectionTitle>
+          <SectionSubtitle sx={{ textAlign: 'center', margin: '0 auto', maxWidth: '600px' }}>
+  A journey through my professional development and educational achievements
+</SectionSubtitle>
 
-              <Grid container spacing={3} sx={{ maxHeight: '60vh', overflow: 'auto' }}>
-                {experiences.map((exp, index) => (
-                  <Grid item xs={12} md={6} key={index}>
-                    <ExperienceCard>
-                      <CardContent sx={{ p: 3 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2 }}>
-                          {exp.hasLogo ? (
-                            <LogoContainer2>
-                              <CompanyLogo 
-                                src={exp.logo} 
-                                alt={`${exp.company} logo`}
-                              />
-                            </LogoContainer2>
+          <Grid container spacing={3}>
+            {experiences.map((exp, index) => (
+              <Grid item xs={12} md={6} key={index}>
+                <ExperienceCard>
+                  <CardContent sx={{ p: 3 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, mb: 2 }}>
+                      {exp.hasLogo ? (
+                        <LogoContainer2>
+                          <CompanyLogo 
+                            src={exp.logo} 
+                            alt={`${exp.company} logo`}
+                          />
+                        </LogoContainer2>
+                      ) : (
+                        <Box sx={{
+                          width: 64,
+                          height: 64,
+                          borderRadius: 2,
+                          background: exp.type === 'work' 
+                            ? 'linear-gradient(135deg, rgba(91, 61, 246, 0.1), rgba(91, 61, 246, 0.2))'
+                            : 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2))',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}>
+                          {exp.type === 'work' ? (
+                            <WorkIcon sx={{ color: '#5b3df6', fontSize: 28 }} />
                           ) : (
-                            <Box sx={{
-                              width: 64,
-                              height: 64,
-                              borderRadius: 2,
-                              background: exp.type === 'work' 
-                                ? 'linear-gradient(135deg, rgba(91, 61, 246, 0.1), rgba(91, 61, 246, 0.2))'
-                                : 'linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.2))',
-                              display: 'flex',
-                              alignItems: 'center',
-                              justifyContent: 'center',
-                            }}>
-                              {exp.type === 'work' ? (
-                                <WorkIcon sx={{ color: '#5b3df6', fontSize: 28 }} />
-                              ) : (
-                                <SchoolIcon sx={{ color: '#3b82f6', fontSize: 28 }} />
-                              )}
-                            </Box>
+                            <SchoolIcon sx={{ color: '#3b82f6', fontSize: 28 }} />
                           )}
-                          <Box sx={{ flex: 1 }}>
-                            <Typography variant="h6" fontWeight={700} sx={{ mb: 0.5 }}>
-                              {exp.company}
-                            </Typography>
-                            <Typography variant="subtitle1" color="#5b3df6" fontWeight={600}>
-                              {exp.position}
-                            </Typography>
-                          </Box>
                         </Box>
-
-                        <Box sx={{ display: 'flex', gap: 2, mb: 2, flexWrap: 'wrap' }}>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                            <LocationOnIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
-                            <Typography variant="body2" color="text.secondary">
-                              {exp.location}
-                            </Typography>
-                          </Box>
-                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                            <CalendarTodayIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
-                            <Typography variant="body2" color="text.secondary">
-                              {exp.duration}
-                            </Typography>
-                          </Box>
-                        </Box>
-
-                        <Typography variant="body2" color="text.secondary" sx={{ mb: 2, lineHeight: 1.6 }}>
-                          {exp.description}
+                      )}
+                      <Box sx={{ flex: 1 }}>
+                        <Typography variant="h6" fontWeight={700} sx={{ mb: 0.5 }}>
+                          {exp.company}
                         </Typography>
+                        <Typography variant="subtitle1" color="#5b3df6" fontWeight={600}>
+                          {exp.position}
+                        </Typography>
+                      </Box>
+                    </Box>
 
-                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                          {exp.skills.map((skill, skillIndex) => (
-                            <Chip 
-                              key={skillIndex}
-                              label={skill}
-                              size="small"
-                              sx={{
-                                backgroundColor: 'rgba(91, 61, 246, 0.08)',
-                                color: '#5b3df6',
-                                fontWeight: 500,
-                              }}
-                            />
-                          ))}
-                        </Box>
-                      </CardContent>
-                    </ExperienceCard>
-                  </Grid>
-                ))}
+                    <Box sx={{ display: 'flex', gap: 2, mb: 2, flexWrap: 'wrap' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <LocationOnIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
+                        <Typography variant="body2" color="text.secondary">
+                          {exp.location}
+                        </Typography>
+                      </Box>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                        <CalendarTodayIcon sx={{ fontSize: 16, color: 'text.secondary' }} />
+                        <Typography variant="body2" color="text.secondary">
+                          {exp.duration}
+                        </Typography>
+                      </Box>
+                    </Box>
+
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2, lineHeight: 1.6 }}>
+                      {exp.description}
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      {exp.skills.map((skill, skillIndex) => (
+                        <Chip 
+                          key={skillIndex}
+                          label={skill}
+                          size="small"
+                          sx={{
+                            backgroundColor: 'rgba(91, 61, 246, 0.08)',
+                            color: '#5b3df6',
+                            fontWeight: 500,
+                          }}
+                        />
+                      ))}
+                    </Box>
+                  </CardContent>
+                </ExperienceCard>
               </Grid>
-            </Container>
-          </ExperienceSection>
-        </SlideContainer>
-      </Box>
+            ))}
+          </Grid>
+        </Container>
+      </SectionContainer>
 
-      {/* Slide Indicators */}
-      <Box sx={{
-        position: 'fixed',
-        right: 20,
-        top: '50%',
-        transform: 'translateY(-50%)',
-        zIndex: 1000,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 1
-      }}>
-        {[0, 1].map((slideIndex) => (
-          <Box
-            key={slideIndex}
-            onClick={() => scrollToSlide(slideIndex)}
-            sx={{
-              width: 12,
-              height: 12,
-              borderRadius: '50%',
-              backgroundColor: currentSlide === slideIndex ? '#5b3df6' : 'rgba(91, 61, 246, 0.3)',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                backgroundColor: '#5b3df6',
-                transform: 'scale(1.2)'
-              }
-            }}
-          />
-        ))}
-      </Box>
+      {/* Section 3: About Me */}
+      <SectionContainer id="about" sx={{ bgcolor: '#f7fbff' }}>
+        <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 } }}>
+          <AboutContainer>
+            <AboutImageContainer>
+              <AboutImageWrapper>
+                <AboutProfileImage 
+                  src={profileImageUrl} 
+                  alt={`${name} - About Me`}
+                />
+              </AboutImageWrapper>
+            </AboutImageContainer>
+
+            <AboutContentBox>
+              <Typography 
+                variant="overline" 
+                sx={{ 
+                  color: '#5b3df6', 
+                  fontWeight: 600, 
+                  letterSpacing: 2,
+                  mb: 1,
+                  display: 'block'
+                }}
+              >
+                About
+              </Typography>
+              
+              <AboutTitle>
+                About Me
+              </AboutTitle>
+              
+              <AboutText>
+                I'm a passionate Full Stack Developer and Information Technology student at Al-Quds University, 
+                with hands-on experience in modern web development technologies. My journey in tech has been 
+                driven by curiosity and a desire to create meaningful digital solutions.
+              </AboutText>
+              
+              <AboutText>
+                Currently working as a Software Developer Intern at Ooredoo, I've gained valuable experience 
+                in both frontend and backend development, working with technologies like React, Django, Java, 
+                and Python. I'm also expanding my global perspective through an exchange program at Mälardalen 
+                University in Sweden.
+              </AboutText>
+              
+              <AboutText>
+                When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, 
+                and sharing knowledge with the developer community. I believe in continuous learning and 
+                staying updated with the latest industry trends.
+              </AboutText>
+
+              <Box sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: { xs: 'center', lg: 'flex-start' } }}>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: '#5b3df6',
+                    borderRadius: 2,
+                    px: 4,
+                    py: 1.5,
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: '#4c2de0',
+                    }
+                  }}
+                >
+                  Download CV
+                </Button>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    borderColor: '#5b3df6',
+                    color: '#5b3df6',
+                    borderRadius: 2,
+                    px: 4,
+                    py: 1.5,
+                    textTransform: 'none',
+                    fontWeight: 600,
+                    '&:hover': {
+                      backgroundColor: 'rgba(91, 61, 246, 0.08)',
+                    }
+                  }}
+                >
+                  Contact Me
+                </Button>
+              </Box>
+            </AboutContentBox>
+          </AboutContainer>
+        </Container>
+      </SectionContainer>
+
+
     </Box>
   );
 };
