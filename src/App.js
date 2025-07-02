@@ -1,14 +1,15 @@
 import './App.css';
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LandingPage from './LandingPage';
+import Portfolio from './Portfolio'; // Fixed import
 
-// Create a theme instance
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#5b3df6', // Matches the purple color in your landing page
+      main: '#5b3df6',
     },
   },
   breakpoints: {
@@ -26,9 +27,16 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
-        <LandingPage />
-      </div>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<LandingPage />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="*" element={<Navigate to="/home" replace />} />
+          </Routes>
+        </div>
+      </Router>
     </ThemeProvider>
   );
 }

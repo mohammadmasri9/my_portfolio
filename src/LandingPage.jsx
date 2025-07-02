@@ -17,12 +17,15 @@ import {
   Card,
   CardContent,
   Chip,
-  Grid
+  Grid,
+  Collapse,
+  Divider
 } from '@mui/material';
 import { styled } from '@mui/system';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
-
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import WorkIcon from '@mui/icons-material/Work';
@@ -31,19 +34,22 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import CodeIcon from '@mui/icons-material/Code';
 import LaunchIcon from '@mui/icons-material/Launch';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import profilePhoto from '../src/assets/Pictures/photo.jpg';
 import OoredooLogo from '../src/assets/Pictures/ooredoo.svg';
 import AlQudsLogo from '../src/assets/Pictures/aqu.png';
 import MalardalenLogo from '../src/assets/Pictures/mdu.png';
+import buthorLogo from '../src/assets/Pictures/buthor .png';
 
 // Styled Components for Navigation
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: 'rgba(247, 251, 255, 0.95)',
-  backdropFilter: 'blur(10px)',
+  backdropFilter: 'blur(20px)',
   borderBottom: '1px solid rgba(91, 61, 246, 0.1)',
   position: 'fixed',
   top: 0,
   zIndex: 1100,
+  boxShadow: '0 4px 20px rgba(91, 61, 246, 0.08)',
 }));
 
 const LogoContainer = styled(Box)(({ theme }) => ({
@@ -95,6 +101,102 @@ const ContactButton = styled(Button)(({ theme }) => ({
     color: '#fff',
     transform: 'translateY(-2px)',
     boxShadow: '0 8px 25px rgba(91, 61, 246, 0.3)',
+  },
+}));
+
+// Enhanced Mobile Menu Components
+const MobileMenuButton = styled(IconButton)(({ theme, isopen }) => ({
+  color: '#5b3df6',
+  padding: theme.spacing(1),
+  borderRadius: theme.spacing(1),
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+  transform: isopen ? 'rotate(180deg)' : 'rotate(0deg)',
+  '&:hover': {
+    backgroundColor: 'rgba(91, 61, 246, 0.08)',
+    transform: isopen ? 'rotate(180deg) scale(1.1)' : 'rotate(0deg) scale(1.1)',
+  },
+}));
+
+const MobileMenuContainer = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  top: '100%',
+  left: 0,
+  right: 0,
+  backgroundColor: 'rgba(255, 255, 255, 0.98)',
+  backdropFilter: 'blur(20px)',
+  borderBottom: '1px solid rgba(91, 61, 246, 0.1)',
+  boxShadow: '0 8px 32px rgba(91, 61, 246, 0.12)',
+  zIndex: 1000,
+}));
+
+const MobileNavList = styled(List)(({ theme }) => ({
+  padding: theme.spacing(2, 0),
+}));
+
+const MobileNavItem = styled(ListItemButton)(({ theme }) => ({
+  margin: theme.spacing(0.5, 2),
+  borderRadius: theme.spacing(1.5),
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: 'rgba(91, 61, 246, 0.08)',
+    transform: 'translateX(8px)',
+    '& .MuiListItemText-primary': {
+      color: '#5b3df6',
+      fontWeight: 600,
+    },
+  },
+}));
+
+const MobileNavText = styled(Typography)(({ theme }) => ({
+  fontSize: '1.1rem',
+  fontWeight: 500,
+  color: theme.palette.text.primary,
+  transition: 'all 0.3s ease',
+}));
+
+const MobileContactSection = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  borderTop: '1px solid rgba(91, 61, 246, 0.1)',
+  background: 'linear-gradient(135deg, rgba(91, 61, 246, 0.02), rgba(59, 130, 246, 0.02))',
+}));
+
+const MobileContactButton = styled(Button)(({ theme }) => ({
+  width: '100%',
+  borderColor: '#5b3df6',
+  color: '#5b3df6',
+  fontWeight: 600,
+  textTransform: 'none',
+  borderRadius: theme.spacing(1.5),
+  padding: theme.spacing(1.5, 3),
+  fontSize: '1rem',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#5b3df6',
+    color: '#fff',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 8px 25px rgba(91, 61, 246, 0.3)',
+  },
+}));
+
+const MobileSocialSection = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
+  display: 'flex',
+  justifyContent: 'center',
+  gap: theme.spacing(2),
+}));
+
+const MobileSocialButton = styled(IconButton)(({ theme }) => ({
+  width: 44,
+  height: 44,
+  backgroundColor: 'rgba(91, 61, 246, 0.08)',
+  color: '#5b3df6',
+  border: '1px solid rgba(91, 61, 246, 0.15)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#5b3df6',
+    color: '#fff',
+    transform: 'translateY(-3px) scale(1.1)',
+    boxShadow: '0 6px 20px rgba(91, 61, 246, 0.3)',
   },
 }));
 
@@ -197,6 +299,43 @@ const ProfileImage = styled('img')(({ theme }) => ({
   objectFit: 'cover',
   objectPosition: 'center center',
   display: 'block',
+}));
+
+// Skills Section Styles
+const SkillsContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: theme.spacing(1.5),
+  justifyContent: { xs: 'center', lg: 'flex-start' },
+  marginTop: theme.spacing(3),
+  marginBottom: theme.spacing(4),
+  maxWidth: '100%',
+}));
+
+const SkillChip = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: theme.spacing(1),
+  padding: theme.spacing(0.75, 1.5),
+  backgroundColor: 'rgba(91, 61, 246, 0.08)',
+  border: '1px solid rgba(91, 61, 246, 0.15)',
+  borderRadius: theme.spacing(3),
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  color: '#5b3df6',
+  transition: 'all 0.3s ease',
+  cursor: 'default',
+  '&:hover': {
+    backgroundColor: 'rgba(91, 61, 246, 0.12)',
+    borderColor: 'rgba(91, 61, 246, 0.25)',
+    transform: 'translateY(-1px)',
+  },
+}));
+
+const SkillIcon = styled('img')(({ theme }) => ({
+  width: 20,
+  height: 20,
+  objectFit: 'contain',
 }));
 
 // About Me Section Styles
@@ -443,6 +582,51 @@ const CompanyLogo = styled('img')(({ theme }) => ({
   borderRadius: theme.spacing(1),
 }));
 
+// Footer Styled Components
+const FooterContainer = styled(Box)(({ theme }) => ({
+  backgroundColor: '#ffffff',
+  borderTop: '1px solid rgba(91, 61, 246, 0.1)',
+  padding: theme.spacing(6, 0),
+  marginTop: theme.spacing(8),
+}));
+
+const FooterContent = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  gap: theme.spacing(3),
+  maxWidth: 400,
+  margin: '0 auto',
+  textAlign: 'center',
+}));
+
+const SocialIconsContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  gap: theme.spacing(2),
+  alignItems: 'center',
+}));
+
+const SocialIconButton = styled(IconButton)(({ theme }) => ({
+  width: 40,
+  height: 40,
+  backgroundColor: 'rgba(91, 61, 246, 0.08)',
+  color: '#5b3df6',
+  border: '1px solid rgba(91, 61, 246, 0.15)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    backgroundColor: '#5b3df6',
+    color: '#fff',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 12px rgba(91, 61, 246, 0.3)',
+  },
+}));
+
+const CopyrightText = styled(Typography)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  fontSize: '0.875rem',
+  fontWeight: 400,
+}));
+
 // Text Styles
 const GreetingText = styled(Typography)(({ theme }) => ({
   fontSize: '1.1rem',
@@ -555,10 +739,85 @@ const HomePage = () => {
 
   const socialLinks = {
     github: "https://github.com/mohammadmasri9",
-    linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a"
+    linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a",
+    instagram: "https://instagram.com/your-instagram",
+    twitter: "https://twitter.com/your-twitter"
   };
 
   const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
+
+  // Skills data with real technology logos
+  const skills = [
+    { 
+      name: 'MongoDB', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg'
+    },
+    { 
+      name: 'Firebase', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg'
+    },
+    { 
+      name: 'Flutter', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg'
+    },
+    { 
+      name: 'Node.js', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg'
+    },
+    { 
+      name: 'SQL', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg'
+    },
+    { 
+      name: 'React.js', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+    },
+    
+    { 
+      name: 'Java', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'
+    },
+    { 
+      name: 'JavaScript', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg'
+    },
+    { 
+      name: 'Python', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg'
+    },
+    { 
+      name: 'TypeScript', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg'
+    },
+    { 
+      name: 'Web Design', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg'
+    },
+    { 
+      name: 'User Interface Design', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sketch/sketch-original.svg'
+    },
+    { 
+      name: 'User Experience (UX)', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg'
+    },
+    { 
+      name: 'Object-Oriented Programming', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg'
+    },
+    { 
+      name: 'PHP', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg'
+    },
+    { 
+      name: 'Adobe Photoshop', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg'
+    },
+    { 
+      name: 'Web Interface Design', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'
+    }
+  ];
 
   const experiences = [
     {
@@ -580,7 +839,8 @@ const HomePage = () => {
       duration: 'Dec 2022 - Mar 2023',
       description: 'Focused on front-end development, creating responsive and user-friendly web interfaces. Worked with modern web technologies to deliver high-quality user experiences.',
       skills: ['Frontend Development', 'JavaScript', 'HTML', 'CSS', 'Responsive Design'],
-      hasLogo: false
+      logo: buthorLogo,
+      hasLogo: true
     },
     {
       type: 'education',
@@ -687,6 +947,29 @@ const HomePage = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setMobileMenuOpen(false); // Close mobile menu after navigation
+  };
+
+  const handleMobileMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const navigateToPortfolio = () => {
+    window.location.href = '/portfolio';
+    setMobileMenuOpen(false);
+  };
+
+  const handleNavItemClick = (item) => {
+    if (item === 'Portfolio') {
+      navigateToPortfolio();
+    } else {
+      scrollToSection(
+        item === 'Home' ? 'home' : 
+        item === 'Experience' ? 'experience' : 
+        item === 'About me' ? 'about' : 
+        'portfolio'
+      );
+    }
   };
 
   return (
@@ -710,28 +993,113 @@ const HomePage = () => {
               </Typography>
             </LogoContainer>
 
+            {/* Desktop Navigation */}
             <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
               {navItems.map((item, index) => (
                 <NavButton 
                   key={item}
-                  onClick={() => scrollToSection(
-                    item === 'Home' ? 'home' : 
-                    item === 'Experience' ? 'experience' : 
-                    item === 'About me' ? 'about' : 
-                    item === 'Portfolio' ? 'portfolio' : 'home'
-                  )}
+                  onClick={() => handleNavItemClick(item)}
                 >
                   {item}
                 </NavButton>
               ))}
             </Box>
 
-            <ContactButton variant="outlined">
+            {/* Desktop Contact Button */}
+            <ContactButton 
+              variant="outlined"
+              sx={{ display: { xs: 'none', md: 'flex' } }}
+            >
               Contact Me
             </ContactButton>
+
+            {/* Mobile Menu Button */}
+            <MobileMenuButton
+              onClick={handleMobileMenuToggle}
+              isopen={mobileMenuOpen ? 1 : 0}
+              sx={{ display: { xs: 'flex', md: 'none' } }}
+            >
+              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+            </MobileMenuButton>
           </Toolbar>
+
+          {/* Mobile Slide Down Menu */}
+          <Collapse in={mobileMenuOpen} timeout={300}>
+            <MobileMenuContainer>
+              <Container maxWidth="xl">
+                <MobileNavList>
+                  {navItems.map((item, index) => (
+                    <MobileNavItem
+                      key={item}
+                      onClick={() => handleNavItemClick(item)}
+                      sx={{
+                        animationDelay: `${index * 100}ms`,
+                        animation: mobileMenuOpen ? 'slideInLeft 0.3s ease forwards' : 'none',
+                      }}
+                    >
+                      <MobileNavText>{item}</MobileNavText>
+                    </MobileNavItem>
+                  ))}
+                </MobileNavList>
+
+                <Divider sx={{ borderColor: 'rgba(91, 61, 246, 0.1)' }} />
+
+                <MobileContactSection>
+                  <MobileContactButton variant="outlined">
+                    Contact Me
+                  </MobileContactButton>
+                </MobileContactSection>
+
+                <MobileSocialSection>
+                  <MobileSocialButton
+                    onClick={() => handleSocialClick('linkedin')}
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedInIcon sx={{ fontSize: 20 }} />
+                  </MobileSocialButton>
+                  
+                  <MobileSocialButton
+                    onClick={() => handleSocialClick('github')}
+                    aria-label="GitHub"
+                  >
+                    <GitHubIcon sx={{ fontSize: 20 }} />
+                  </MobileSocialButton>
+                  
+                  <MobileSocialButton
+                    onClick={() => handleSocialClick('instagram')}
+                    aria-label="Instagram"
+                  >
+                    <InstagramIcon sx={{ fontSize: 20 }} />
+                  </MobileSocialButton>
+                  
+                  <MobileSocialButton
+                    onClick={() => handleSocialClick('twitter')}
+                    aria-label="Twitter"
+                  >
+                    <TwitterIcon sx={{ fontSize: 20 }} />
+                  </MobileSocialButton>
+                </MobileSocialSection>
+              </Container>
+            </MobileMenuContainer>
+          </Collapse>
         </Container>
       </StyledAppBar>
+
+      {/* Add keyframes for animations */}
+      <style>
+        {`
+          @keyframes slideInLeft {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}
+      </style>
 
       {/* Section 1: Home */}
       <SectionContainer id="home" sx={{ bgcolor: '#f7fbff' }}>
@@ -758,31 +1126,37 @@ const HomePage = () => {
                 Specializing in modern web applications using React, Node.js, and cutting-edge technologies.
               </InfoText>
 
-              <Box sx={{ display: 'flex', gap: 3, mt: 3, justifyContent: 'center' }}>
-                <ModernSocialButton 
-                  platform="linkedin"
-                  onClick={() => handleSocialClick('linkedin')}
+              {/* Skills Section */}
+              <Box sx={{ mb: 4 }}>
+                <Typography 
+                  variant="h6" 
+                  sx={{ 
+                    fontWeight: 600, 
+                    mb: 2, 
+                    color: 'text.primary',
+                    textAlign: { xs: 'center', lg: 'left' }
+                  }}
                 >
-                  <SocialIconContainer platform="linkedin">
-                    <LinkedInIcon sx={{ color: '#fff', fontSize: 24 }} />
-                  </SocialIconContainer>
-                  <Typography variant="caption">Connect with me</Typography>
-                </ModernSocialButton>
-                
-                <ModernSocialButton 
-                  platform="github"
-                  onClick={() => handleSocialClick('github')}
-                >
-                  <SocialIconContainer platform="github">
-                    <GitHubIcon sx={{ color: '#fff', fontSize: 24 }} />
-                  </SocialIconContainer>
-                  <Typography variant="caption">Reach me on GitHub</Typography>
-                </ModernSocialButton>
+                  Skills
+                </Typography>
+                <SkillsContainer>
+                  {skills.map((skill, index) => (
+                    <SkillChip key={index}>
+                      <SkillIcon 
+                        src={skill.icon} 
+                        alt={`${skill.name} logo`}
+                        onError={(e) => {
+                          // Fallback if image fails to load
+                          e.target.style.display = 'none';
+                        }}
+                      />
+                      <span>{skill.name}</span>
+                    </SkillChip>
+                  ))}
+                </SkillsContainer>
               </Box>
               
-              <CTAButton onClick={() => scrollToSection('experience')}>
-                View My Experience
-              </CTAButton>
+              
             </ContentBox>
 
             <ImageContainer>
@@ -794,7 +1168,9 @@ const HomePage = () => {
                   />
                 </ProfileImageContainer>
               </DecorativeContainer>
+              
             </ImageContainer>
+            
           </MainSection>
         </Container>
       </SectionContainer>
@@ -806,8 +1182,8 @@ const HomePage = () => {
             My Experience
           </SectionTitle>
           <SectionSubtitle sx={{ textAlign: 'center', margin: '0 auto', maxWidth: '600px' }}>
-  A journey through my professional development and educational achievements
-</SectionSubtitle>
+            A journey through my professional development and educational achievements
+          </SectionSubtitle>
 
           <Grid container spacing={3}>
             {experiences.map((exp, index) => (
@@ -982,7 +1358,46 @@ const HomePage = () => {
         </Container>
       </SectionContainer>
 
-
+      {/* Footer */}
+      <FooterContainer>
+        <Container maxWidth="lg">
+          <FooterContent>
+            <SocialIconsContainer>
+              <SocialIconButton
+                onClick={() => handleSocialClick('linkedin')}
+                aria-label="LinkedIn Profile"
+              >
+                <LinkedInIcon sx={{ fontSize: 20 }} />
+              </SocialIconButton>
+              
+              <SocialIconButton
+                onClick={() => handleSocialClick('instagram')}
+                aria-label="Instagram Profile"
+              >
+                <InstagramIcon sx={{ fontSize: 20 }} />
+              </SocialIconButton>
+              
+              <SocialIconButton
+                onClick={() => handleSocialClick('twitter')}
+                aria-label="Twitter Profile"
+              >
+                <TwitterIcon sx={{ fontSize: 20 }} />
+              </SocialIconButton>
+              
+              <SocialIconButton
+                onClick={() => handleSocialClick('github')}
+                aria-label="GitHub Profile"
+              >
+                <GitHubIcon sx={{ fontSize: 20 }} />
+              </SocialIconButton>
+            </SocialIconsContainer>
+            
+            <CopyrightText>
+              Copyright © 2025 All rights reserved
+            </CopyrightText>
+          </FooterContent>
+        </Container>
+      </FooterContainer>
     </Box>
   );
 };
