@@ -99,7 +99,7 @@ const ContactButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// Mobile Menu Components
+// Enhanced Mobile Menu Components
 const MobileMenuButton = styled(IconButton)(({ theme, isopen }) => ({
   color: '#5b3df6',
   padding: theme.spacing(1),
@@ -131,10 +131,9 @@ const MobileNavList = styled(List)(({ theme }) => ({
 const MobileNavItem = styled(ListItemButton)(({ theme }) => ({
   margin: theme.spacing(0.5, 2),
   borderRadius: theme.spacing(1.5),
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
   '&:hover': {
     backgroundColor: 'rgba(91, 61, 246, 0.08)',
-    transform: 'translateX(8px)',
     '& .MuiTypography-root': {
       color: '#5b3df6',
       fontWeight: 600,
@@ -146,7 +145,7 @@ const MobileNavText = styled(Typography)(({ theme }) => ({
   fontSize: '1.1rem',
   fontWeight: 500,
   color: theme.palette.text.primary,
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
 }));
 
 const MobileContactSection = styled(Box)(({ theme }) => ({
@@ -411,6 +410,7 @@ const ContactMe = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
 
   const contactInfo = {
     name: "Mohammad Almasri",
@@ -427,10 +427,18 @@ const ContactMe = () => {
     github: "https://github.com/mohammadmasri9",
     linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a",
     instagram: "https://instagram.com/masri.m7md",
-    twitter: "https://x.com/mohammad79537132",
+    twitter: "https://x.com/mohamma79537132",
   };
 
   const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
+
+  // FIXED: Instant menu close function
+  const closeMenuInstantly = () => {
+    setIsClosing(true);
+    setMobileMenuOpen(false);
+    // Reset closing state after animation would complete
+    setTimeout(() => setIsClosing(false), 50);
+  };
 
   const handleSocialClick = (platform) => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
@@ -455,31 +463,45 @@ const ContactMe = () => {
     }
   };
 
-  // FIXED: Updated scrollToSection function to handle Portfolio correctly
+  // FIXED: Instant scroll function
   const scrollToSection = (sectionId) => {
     if (sectionId === 'home') {
       window.location.href = '/';
     } else if (sectionId === 'portfolio') {
       window.location.href = '/portfolio';
+    } else if (sectionId === 'contact') {
+      window.location.href = '/contact';
     } else {
       window.location.href = `/#${sectionId}`;
     }
-    setMobileMenuOpen(false);
   };
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // Navigation handler remains the same
+  // FIXED: Instant navigation functions
+  const navigateToContact = () => {
+    closeMenuInstantly();
+    scrollToSection('contact');
+  };
+
+  // FIXED: Main navigation handler with instant close
   const handleNavItemClick = (item) => {
-    scrollToSection(
-      item === 'Home' ? 'home' : 
-      item === 'Experience' ? 'experience' : 
-      item === 'About me' ? 'about' : 
-      item === 'Portfolio' ? 'portfolio' :
-      'home'
-    );
+    // Close menu instantly with no delay
+    closeMenuInstantly();
+    
+    // Navigate immediately without waiting
+    if (item === 'Portfolio') {
+      scrollToSection('portfolio');
+    } else {
+      scrollToSection(
+        item === 'Home' ? 'home' : 
+        item === 'Experience' ? 'experience' : 
+        item === 'About me' ? 'about' : 
+        'home'
+      );
+    }
   };
 
   return (
@@ -523,6 +545,7 @@ const ContactMe = () => {
                 backgroundColor: 'rgba(91, 61, 246, 0.08)',
                 color: '#5b3df6'
               }}
+              onClick={navigateToContact}
             >
               Contact Me
             </ContactButton>
@@ -537,8 +560,12 @@ const ContactMe = () => {
             </MobileMenuButton>
           </Toolbar>
 
-          {/* Mobile Slide Down Menu */}
-          <Collapse in={mobileMenuOpen} timeout={300}>
+          {/* FIXED: Mobile Menu with conditional instant close */}
+          <Collapse 
+            in={mobileMenuOpen} 
+            timeout={isClosing ? 0 : 150}
+            unmountOnExit
+          >
             <MobileMenuContainer>
               <Container maxWidth="xl">
                 <MobileNavList>
@@ -547,8 +574,8 @@ const ContactMe = () => {
                       key={item}
                       onClick={() => handleNavItemClick(item)}
                       sx={{
-                        animationDelay: `${index * 100}ms`,
-                        animation: mobileMenuOpen ? 'slideInLeft 0.3s ease forwards' : 'none',
+                        // Remove animation delays that cause the sticky effect
+                        transition: 'all 0.2s ease',
                       }}
                     >
                       <MobileNavText>{item}</MobileNavText>
@@ -559,35 +586,50 @@ const ContactMe = () => {
                 <Divider sx={{ borderColor: 'rgba(91, 61, 246, 0.1)' }} />
 
                 <MobileContactSection>
-                  <MobileContactButton variant="outlined">
+                  <MobileContactButton 
+                    variant="outlined"
+                    onClick={navigateToContact}
+                  >
                     Contact Me
                   </MobileContactButton>
                 </MobileContactSection>
 
                 <MobileSocialSection>
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('linkedin')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('linkedin');
+                    }}
                     aria-label="LinkedIn"
                   >
                     <LinkedInIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('github')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('github');
+                    }}
                     aria-label="GitHub"
                   >
                     <GitHubIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('instagram')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('instagram');
+                    }}
                     aria-label="Instagram"
                   >
                     <InstagramIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('twitter')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('twitter');
+                    }}
                     aria-label="Twitter"
                   >
                     <TwitterIcon sx={{ fontSize: 20 }} />
@@ -599,18 +641,11 @@ const ContactMe = () => {
         </Container>
       </StyledAppBar>
 
-      {/* Add keyframes for animations */}
+      {/* Simplified animations for instant response */}
       <style>
         {`
-          @keyframes slideInLeft {
-            from {
-              opacity: 0;
-              transform: translateX(-20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0);
-            }
+          .mobile-nav-item {
+            transition: background-color 0.2s ease, transform 0.2s ease !important;
           }
           
           @keyframes pulse {
@@ -1093,6 +1128,6 @@ const ContactMe = () => {
       </FooterContainer>
     </Box>
   );
-  };
+};
 
-  export default ContactMe;
+export default ContactMe;
