@@ -959,6 +959,11 @@ const HomePage = () => {
     setMobileMenuOpen(false);
   };
 
+  const navigateToContact = () => {
+    window.location.href = '/contact';
+    setMobileMenuOpen(false);
+  };
+
   const handleNavItemClick = (item) => {
     if (item === 'Portfolio') {
       navigateToPortfolio();
@@ -1009,6 +1014,7 @@ const HomePage = () => {
             <ContactButton 
               variant="outlined"
               sx={{ display: { xs: 'none', md: 'flex' } }}
+              onClick={navigateToContact}
             >
               Contact Me
             </ContactButton>
@@ -1045,7 +1051,10 @@ const HomePage = () => {
                 <Divider sx={{ borderColor: 'rgba(91, 61, 246, 0.1)' }} />
 
                 <MobileContactSection>
-                  <MobileContactButton variant="outlined">
+                  <MobileContactButton 
+                    variant="outlined"
+                    onClick={navigateToContact}
+                  >
                     Contact Me
                   </MobileContactButton>
                 </MobileContactSection>
@@ -1155,8 +1164,6 @@ const HomePage = () => {
                   ))}
                 </SkillsContainer>
               </Box>
-              
-              
             </ContentBox>
 
             <ImageContainer>
@@ -1168,9 +1175,7 @@ const HomePage = () => {
                   />
                 </ProfileImageContainer>
               </DecorativeContainer>
-              
             </ImageContainer>
-            
           </MainSection>
         </Container>
       </SectionContainer>
@@ -1349,6 +1354,7 @@ const HomePage = () => {
                       backgroundColor: 'rgba(91, 61, 246, 0.08)',
                     }
                   }}
+                  onClick={navigateToContact}
                 >
                   Contact Me
                 </Button>

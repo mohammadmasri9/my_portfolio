@@ -531,6 +531,11 @@ const Portfolio = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const navigateToContact = () => {
+    window.location.href = '/contact';
+    setMobileMenuOpen(false);
+  };
+
   const handleNavItemClick = (item) => {
     if (item === 'Projects') {
       scrollToSection('projects');
@@ -575,7 +580,7 @@ const Portfolio = () => {
 
   return (
     <Box>
-        {/* Navigation Bar */}
+      {/* Navigation Bar */}
       <StyledAppBar elevation={0}>
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
@@ -610,6 +615,7 @@ const Portfolio = () => {
             <ContactButton 
               variant="outlined"
               sx={{ display: { xs: 'none', md: 'flex' } }}
+              onClick={navigateToContact}
             >
               Contact Me
             </ContactButton>
@@ -646,7 +652,10 @@ const Portfolio = () => {
                 <Divider sx={{ borderColor: 'rgba(91, 61, 246, 0.1)' }} />
 
                 <MobileContactSection>
-                  <MobileContactButton variant="outlined">
+                  <MobileContactButton 
+                    variant="outlined"
+                    onClick={navigateToContact}
+                  >
                     Contact Me
                   </MobileContactButton>
                 </MobileContactSection>
@@ -968,6 +977,7 @@ const Portfolio = () => {
             <Button
               variant="contained"
               size="large"
+              onClick={navigateToContact}
               sx={{
                 backgroundColor: '#5b3df6',
                 borderRadius: 2,

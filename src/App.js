@@ -5,6 +5,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LandingPage from './LandingPage';
 import Portfolio from './Portfolio'; // Fixed import
+import ContactMe from './ContactMe';
 
 const theme = createTheme({
   palette: {
@@ -34,6 +35,8 @@ function App() {
             <Route path="/home" element={<LandingPage />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="*" element={<Navigate to="/home" replace />} />
+            <Route path="/contact" element={<ContactMe/>} />
+
           </Routes>
         </div>
       </Router>
