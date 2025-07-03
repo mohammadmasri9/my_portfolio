@@ -36,7 +36,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 // Import profile photo - Update this path according to your actual file structure
 import ProfilePhoto from '../src/assets/Pictures/photo.jpg';
 
-// Styled Components for Navigation (Same as Portfolio)
+// Styled Components for Navigation
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   backgroundColor: 'rgba(247, 251, 255, 0.95)',
   backdropFilter: 'blur(20px)',
@@ -99,7 +99,7 @@ const ContactButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-// Mobile Menu Components (Same as Portfolio)
+// Mobile Menu Components
 const MobileMenuButton = styled(IconButton)(({ theme, isopen }) => ({
   color: '#5b3df6',
   padding: theme.spacing(1),
@@ -195,7 +195,7 @@ const MobileSocialButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-// Footer Components (Same as Portfolio)
+// Footer Components
 const FooterContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#ffffff',
   borderTop: '1px solid rgba(91, 61, 246, 0.1)',
@@ -325,6 +325,9 @@ const ContactCard = styled(Card)(({ theme }) => ({
     transform: 'translateY(-8px)',
     boxShadow: '0 20px 60px rgba(91, 61, 246, 0.15)',
     borderColor: 'rgba(91, 61, 246, 0.2)',
+  },
+  [theme.breakpoints.down('md')]: {
+    borderRadius: '16px',
   }
 }));
 
@@ -427,7 +430,7 @@ const ContactMe = () => {
     twitter: "https://x.com/mohammad79537132",
   };
 
-  const navItems = ['Home', 'Experience', 'About me', 'Projects', 'Certifications'];
+  const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
 
   const handleSocialClick = (platform) => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
@@ -452,9 +455,12 @@ const ContactMe = () => {
     }
   };
 
+  // FIXED: Updated scrollToSection function to handle Portfolio correctly
   const scrollToSection = (sectionId) => {
     if (sectionId === 'home') {
       window.location.href = '/';
+    } else if (sectionId === 'portfolio') {
+      window.location.href = '/portfolio';
     } else {
       window.location.href = `/#${sectionId}`;
     }
@@ -465,13 +471,13 @@ const ContactMe = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // Navigation handler remains the same
   const handleNavItemClick = (item) => {
     scrollToSection(
       item === 'Home' ? 'home' : 
       item === 'Experience' ? 'experience' : 
       item === 'About me' ? 'about' : 
-      item === 'Projects' ? 'projects' :
-      item === 'Certifications' ? 'certifications' : 
+      item === 'Portfolio' ? 'portfolio' :
       'home'
     );
   };
@@ -709,231 +715,230 @@ const ContactMe = () => {
           </ProfileSection>
 
           {/* Contact Information Grid - Centered and bigger */}
-<Box sx={{ 
-  display: 'flex', 
-  justifyContent: 'center', 
-  width: '100%',
-  px: { xs: 2, md: 4 }
-}}>
-  <ContactGrid 
-    container 
-    spacing={3} 
-    sx={{ 
-      maxWidth: '1000px',
-      justifyContent: 'center',
-      width: '100%'
-    }}
-  >
-    <Grid item xs={6} sm={6} md={3}>
-      <ContactCard>
-        <CardContent sx={{ 
-          p: 4, 
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          minHeight: '240px'
-        }}>
-          <ContactIconContainer sx={{ 
-            mx: 'auto',
-            width: 60,
-            height: 60,
-            mb: 2
+          <Box sx={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            width: '100%',
+            px: { xs: 2, md: 4 }
           }}>
-            <EmailIcon sx={{ fontSize: 28, color: '#fff' }} />
-          </ContactIconContainer>
-          <Typography variant="h6" sx={{ 
-            fontWeight: 600, 
-            color: '#333', 
-            mb: 1,
-            fontSize: '1.2rem'
-          }}>
-            Email Address
-          </Typography>
-          <Typography variant="body2" sx={{ 
-            color: '#666',
-            mb: 3,
-            fontSize: '0.9rem',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            Send me a message
-          </Typography>
-          <ActionButton 
-            onClick={() => handleContactClick('email', contactInfo.email)}
-            fullWidth
-            sx={{ 
-              mt: 'auto',
-              py: 1.5,
-              fontSize: '0.95rem'
-            }}
-          >
-            Send Email
-          </ActionButton>
-        </CardContent>
-      </ContactCard>
-    </Grid>
+            <ContactGrid 
+              container 
+              spacing={3} 
+              sx={{ 
+                maxWidth: '1000px',
+                justifyContent: 'center',
+                width: '100%'
+              }}
+            >
+              <Grid item xs={6} sm={6} md={3}>
+                <ContactCard>
+                  <CardContent sx={{ 
+                    p: 4, 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    minHeight: '240px'
+                  }}>
+                    <ContactIconContainer sx={{ 
+                      mx: 'auto',
+                      width: 60,
+                      height: 60,
+                      mb: 2
+                    }}>
+                      <EmailIcon sx={{ fontSize: 28, color: '#fff' }} />
+                    </ContactIconContainer>
+                    <Typography variant="h6" sx={{ 
+                      fontWeight: 600, 
+                      color: '#333', 
+                      mb: 1,
+                      fontSize: '1.2rem'
+                    }}>
+                      Email Address
+                    </Typography>
+                    <Typography variant="body2" sx={{ 
+                      color: '#666',
+                      mb: 3,
+                      fontSize: '0.9rem',
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      Send me a message
+                    </Typography>
+                    <ActionButton 
+                      onClick={() => handleContactClick('email', contactInfo.email)}
+                      fullWidth
+                      sx={{ 
+                        mt: 'auto',
+                        py: 1.5,
+                        fontSize: '0.95rem'
+                      }}
+                    >
+                      Send Email
+                    </ActionButton>
+                  </CardContent>
+                </ContactCard>
+              </Grid>
 
-    <Grid item xs={6} sm={6} md={3}>
-      <ContactCard>
-        <CardContent sx={{ 
-          p: 4, 
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          minHeight: '240px'
-        }}>
-          <ContactIconContainer sx={{ 
-            mx: 'auto',
-            width: 60,
-            height: 60,
-            mb: 2
-          }}>
-            <PhoneIcon sx={{ fontSize: 28, color: '#fff' }} />
-          </ContactIconContainer>
-          <Typography variant="h6" sx={{ 
-            fontWeight: 600, 
-            color: '#333', 
-            mb: 1,
-            fontSize: '1.2rem'
-          }}>
-            Phone Number
-          </Typography>
-          <Typography variant="body2" sx={{ 
-            color: '#666',
-            mb: 3,
-            fontSize: '0.9rem',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            Call me directly
-          </Typography>
-          <ActionButton 
-            onClick={() => handleContactClick('phone', contactInfo.phone)}
-            fullWidth
-            sx={{ 
-              mt: 'auto',
-              py: 1.5,
-              fontSize: '0.95rem'
-            }}
-          >
-            Call Now
-          </ActionButton>
-        </CardContent>
-      </ContactCard>
-    </Grid>
+              <Grid item xs={6} sm={6} md={3}>
+                <ContactCard>
+                  <CardContent sx={{ 
+                    p: 4, 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    minHeight: '240px'
+                  }}>
+                    <ContactIconContainer sx={{ 
+                      mx: 'auto',
+                      width: 60,
+                      height: 60,
+                      mb: 2
+                    }}>
+                      <PhoneIcon sx={{ fontSize: 28, color: '#fff' }} />
+                    </ContactIconContainer>
+                    <Typography variant="h6" sx={{ 
+                      fontWeight: 600, 
+                      color: '#333', 
+                      mb: 1,
+                      fontSize: '1.2rem'
+                    }}>
+                      Phone Number
+                    </Typography>
+                    <Typography variant="body2" sx={{ 
+                      color: '#666',
+                      mb: 3,
+                      fontSize: '0.9rem',
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      Call me directly
+                    </Typography>
+                    <ActionButton 
+                      onClick={() => handleContactClick('phone', contactInfo.phone)}
+                      fullWidth
+                      sx={{ 
+                        mt: 'auto',
+                        py: 1.5,
+                        fontSize: '0.95rem'
+                      }}
+                    >
+                      Call Now
+                    </ActionButton>
+                  </CardContent>
+                </ContactCard>
+              </Grid>
 
-    <Grid item xs={6} sm={6} md={3}>
-      <ContactCard>
-        <CardContent sx={{ 
-          p: 4, 
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          minHeight: '240px'
-        }}>
-          <ContactIconContainer sx={{ 
-            mx: 'auto',
-            width: 60,
-            height: 60,
-            mb: 2
-          }}>
-            <WhatsAppIcon sx={{ fontSize: 28, color: '#fff' }} />
-          </ContactIconContainer>
-          <Typography variant="h6" sx={{ 
-            fontWeight: 600, 
-            color: '#333', 
-            mb: 1,
-            fontSize: '1.2rem'
-          }}>
-            WhatsApp
-          </Typography>
-          <Typography variant="body2" sx={{ 
-            color: '#666',
-            mb: 3,
-            fontSize: '0.9rem',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            Quick messaging
-          </Typography>
-          <ActionButton 
-            onClick={() => handleContactClick('whatsapp', contactInfo.whatsapp)}
-            fullWidth
-            sx={{ 
-              mt: 'auto',
-              py: 1.5,
-              fontSize: '0.95rem'
-            }}
-          >
-            Message
-          </ActionButton>
-        </CardContent>
-      </ContactCard>
-    </Grid>
+              <Grid item xs={6} sm={6} md={3}>
+                <ContactCard>
+                  <CardContent sx={{ 
+                    p: 4, 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    minHeight: '240px'
+                  }}>
+                    <ContactIconContainer sx={{ 
+                      mx: 'auto',
+                      width: 60,
+                      height: 60,
+                      mb: 2
+                    }}>
+                      <WhatsAppIcon sx={{ fontSize: 28, color: '#fff' }} />
+                    </ContactIconContainer>
+                    <Typography variant="h6" sx={{ 
+                      fontWeight: 600, 
+                      color: '#333', 
+                      mb: 1,
+                      fontSize: '1.2rem'
+                    }}>
+                      WhatsApp
+                    </Typography>
+                    <Typography variant="body2" sx={{ 
+                      color: '#666',
+                      mb: 3,
+                      fontSize: '0.9rem',
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      Quick messaging
+                    </Typography>
+                    <ActionButton 
+                      onClick={() => handleContactClick('whatsapp', contactInfo.whatsapp)}
+                      fullWidth
+                      sx={{ 
+                        mt: 'auto',
+                        py: 1.5,
+                        fontSize: '0.95rem'
+                      }}
+                    >
+                      Message
+                    </ActionButton>
+                  </CardContent>
+                </ContactCard>
+              </Grid>
 
-    <Grid item xs={6} sm={6} md={3}>
-      <ContactCard>
-        <CardContent sx={{ 
-          p: 4, 
-          textAlign: 'center',
-          display: 'flex',
-          flexDirection: 'column',
-          height: '100%',
-          minHeight: '240px'
-        }}>
-          <ContactIconContainer sx={{ 
-            mx: 'auto',
-            width: 60,
-            height: 60,
-            mb: 2
-          }}>
-            <LanguageIcon sx={{ fontSize: 28, color: '#fff' }} />
-          </ContactIconContainer>
-          <Typography variant="h6" sx={{ 
-            fontWeight: 600, 
-            color: '#333', 
-            mb: 1,
-            fontSize: '1.2rem'
-          }}>
-            Website
-          </Typography>
-          <Typography variant="body2" sx={{ 
-            color: '#666',
-            mb: 3,
-            fontSize: '0.9rem',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            Visit my portfolio
-          </Typography>
-          <ActionButton 
-            onClick={() => handleContactClick('website', contactInfo.website)}
-            fullWidth
-            sx={{ 
-              mt: 'auto',
-              py: 1.5,
-              fontSize: '0.95rem'
-            }}
-          >
-            Visit Site
-          </ActionButton>
-        </CardContent>
-      </ContactCard>
-    </Grid>
-  </ContactGrid>
-</Box>
-            
+              <Grid item xs={6} sm={6} md={3}>
+                <ContactCard>
+                  <CardContent sx={{ 
+                    p: 4, 
+                    textAlign: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: '100%',
+                    minHeight: '240px'
+                  }}>
+                    <ContactIconContainer sx={{ 
+                      mx: 'auto',
+                      width: 60,
+                      height: 60,
+                      mb: 2
+                    }}>
+                      <LanguageIcon sx={{ fontSize: 28, color: '#fff' }} />
+                    </ContactIconContainer>
+                    <Typography variant="h6" sx={{ 
+                      fontWeight: 600, 
+                      color: '#333', 
+                      mb: 1,
+                      fontSize: '1.2rem'
+                    }}>
+                      Website
+                    </Typography>
+                    <Typography variant="body2" sx={{ 
+                      color: '#666',
+                      mb: 3,
+                      fontSize: '0.9rem',
+                      flex: 1,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      Visit my portfolio
+                    </Typography>
+                    <ActionButton 
+                      onClick={() => handleContactClick('website', contactInfo.website)}
+                      fullWidth
+                      sx={{ 
+                        mt: 'auto',
+                        py: 1.5,
+                        fontSize: '0.95rem'
+                      }}
+                    >
+                      Visit Site
+                    </ActionButton>
+                  </CardContent>
+                </ContactCard>
+              </Grid>
+            </ContactGrid>
+          </Box>
 
           {/* Social Media Section */}
           <SocialMediaSection>

@@ -40,6 +40,7 @@ import OoredooLogo from '../src/assets/Pictures/ooredoo.svg';
 import AlQudsLogo from '../src/assets/Pictures/aqu.png';
 import MalardalenLogo from '../src/assets/Pictures/mdu.png';
 import buthorLogo from '../src/assets/Pictures/buthor .png';
+import cvFile from '../src/assets/Files/cv.pdf';
 
 // Styled Components for Navigation
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -740,13 +741,23 @@ const HomePage = () => {
   const socialLinks = {
     github: "https://github.com/mohammadmasri9",
     linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a",
-    instagram: "https://instagram.com/your-instagram",
-    twitter: "https://twitter.com/your-twitter"
+    instagram: "https://instagram.com/masri.m7md",
+    twitter: "https://x.com/mohammad79537132",
   };
 
   const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
 
-  // Skills data with real technology logos
+  // CV Download Function
+  const handleDownloadCV = () => {
+    const link = document.createElement('a');
+    link.href = cvFile;
+    link.download = 'Mohammad_Almasri_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  // Skills data with real technology logos (updated with new skills)
   const skills = [
     { 
       name: 'MongoDB', 
@@ -772,7 +783,6 @@ const HomePage = () => {
       name: 'React.js', 
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
     },
-    
     { 
       name: 'Java', 
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg'
@@ -816,6 +826,35 @@ const HomePage = () => {
     { 
       name: 'Web Interface Design', 
       icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg'
+    },
+    // New skills added
+    { 
+      name: 'Supabase', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg'
+    },
+    { 
+      name: 'Django', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg'
+    },
+    { 
+      name: 'Flask', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg'
+    },
+    { 
+      name: 'ASP.NET', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg'
+    },
+    { 
+      name: 'API Development', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg'
+    },
+    { 
+      name: 'React Native', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+    },
+    { 
+      name: 'Technical Support', 
+      icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ubuntu/ubuntu-plain.svg'
     }
   ];
 
@@ -942,38 +981,57 @@ const HomePage = () => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
   };
 
+  // FIXED: Optimized scroll function with immediate menu close
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }, 100); // Small delay to allow menu to start closing
     }
-    setMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // FIXED: Immediate menu close for navigation functions
   const navigateToPortfolio = () => {
-    window.location.href = '/portfolio';
-    setMobileMenuOpen(false);
+    setMobileMenuOpen(false); // Close immediately
+    setTimeout(() => {
+      window.location.href = '/portfolio';
+    }, 100);
   };
 
   const navigateToContact = () => {
-    window.location.href = '/contact';
-    setMobileMenuOpen(false);
+    setMobileMenuOpen(false); // Close immediately
+    setTimeout(() => {
+      window.location.href = '/contact';
+    }, 100);
   };
 
+  // FIXED: Main navigation handler with immediate menu close
   const handleNavItemClick = (item) => {
+    // 1. Close menu immediately
+    setMobileMenuOpen(false);
+    
+    // 2. Handle navigation with slight delay to allow menu to start closing
+    const navigationDelay = 100;
+    
     if (item === 'Portfolio') {
-      navigateToPortfolio();
+      setTimeout(() => navigateToPortfolio(), navigationDelay);
     } else {
-      scrollToSection(
-        item === 'Home' ? 'home' : 
-        item === 'Experience' ? 'experience' : 
-        item === 'About me' ? 'about' : 
-        'portfolio'
-      );
+      setTimeout(() => {
+        scrollToSection(
+          item === 'Home' ? 'home' : 
+          item === 'Experience' ? 'experience' : 
+          item === 'About me' ? 'about' : 
+          'portfolio'
+        );
+      }, navigationDelay);
     }
   };
 
@@ -1029,8 +1087,8 @@ const HomePage = () => {
             </MobileMenuButton>
           </Toolbar>
 
-          {/* Mobile Slide Down Menu */}
-          <Collapse in={mobileMenuOpen} timeout={300}>
+          {/* Mobile Slide Down Menu - FIXED: Faster timeout */}
+          <Collapse in={mobileMenuOpen} timeout={200}>
             <MobileMenuContainer>
               <Container maxWidth="xl">
                 <MobileNavList>
@@ -1326,6 +1384,7 @@ const HomePage = () => {
               <Box sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: { xs: 'center', lg: 'flex-start' } }}>
                 <Button
                   variant="contained"
+                  onClick={handleDownloadCV}
                   sx={{
                     backgroundColor: '#5b3df6',
                     borderRadius: 2,
