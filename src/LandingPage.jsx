@@ -1367,7 +1367,7 @@ const HomePage = () => {
               <AboutTitle>
                 About Me
               </AboutTitle>
-              <AboutText>
+     <AboutText>
   I am a passionate Full Stack Developer and Information Technology student at Al-Quds University, 
   with hands-on experience in modern web development technologies. My journey in tech has been 
   driven by curiosity and a desire to create meaningful digital solutions.
@@ -1381,10 +1381,11 @@ const HomePage = () => {
 </AboutText>
 
 <AboutText>
-  When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, 
-  and sharing knowledge with the developer community. I believe in continuous learning and 
+  Alongside coding, I am eager to explore new technologies, contribute to open-source projects, 
+  and share knowledge with the developer community. I believe in continuous learning and 
   staying updated with the latest industry trends.
 </AboutText>
+
 
 
               <Box sx={{ display: 'flex', gap: 2, mt: 4, justifyContent: { xs: 'center', lg: 'flex-start' } }}>
