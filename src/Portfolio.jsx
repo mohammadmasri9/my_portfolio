@@ -505,7 +505,7 @@ const Portfolio = () => {
     github: "https://github.com/mohammadmasri9",
     linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a",
     instagram: "https://instagram.com/masri.m7md",
-    twitter: "https://x.com/mohammad79537132",
+    twitter: "https://x.com/mohamma79537132",
   };
 
   const navItems = ['Home', 'Experience', 'About me', 'Projects', 'Certifications'];
