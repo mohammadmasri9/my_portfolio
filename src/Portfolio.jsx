@@ -138,10 +138,9 @@ const MobileNavList = styled(List)(({ theme }) => ({
 const MobileNavItem = styled(ListItemButton)(({ theme }) => ({
   margin: theme.spacing(0.5, 2),
   borderRadius: theme.spacing(1.5),
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
   '&:hover': {
     backgroundColor: 'rgba(91, 61, 246, 0.08)',
-    transform: 'translateX(8px)',
     '& .MuiTypography-root': {
       color: '#5b3df6',
       fontWeight: 600,
@@ -153,7 +152,7 @@ const MobileNavText = styled(Typography)(({ theme }) => ({
   fontSize: '1.1rem',
   fontWeight: 500,
   color: theme.palette.text.primary,
-  transition: 'all 0.3s ease',
+  transition: 'all 0.2s ease',
 }));
 
 const MobileContactSection = styled(Box)(({ theme }) => ({
@@ -384,6 +383,7 @@ const Portfolio = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const [isClosing, setIsClosing] = React.useState(false);
 
   const projects = [
     {
@@ -510,10 +510,19 @@ const Portfolio = () => {
 
   const navItems = ['Home', 'Experience', 'About me', 'Projects', 'Certifications'];
 
+  // FIXED: Instant menu close function
+  const closeMenuInstantly = () => {
+    setIsClosing(true);
+    setMobileMenuOpen(false);
+    // Reset closing state after animation would complete
+    setTimeout(() => setIsClosing(false), 50);
+  };
+
   const handleSocialClick = (platform) => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
   };
 
+  // FIXED: Instant scroll function
   const scrollToSection = (sectionId) => {
     if (sectionId === 'home') {
       window.location.href = '/';
@@ -524,19 +533,24 @@ const Portfolio = () => {
     } else {
       window.location.href = `/#${sectionId}`;
     }
-    setMobileMenuOpen(false);
   };
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  // FIXED: Instant navigation functions
   const navigateToContact = () => {
+    closeMenuInstantly();
     window.location.href = '/contact';
-    setMobileMenuOpen(false);
   };
 
+  // FIXED: Main navigation handler with instant close
   const handleNavItemClick = (item) => {
+    // Close menu instantly with no delay
+    closeMenuInstantly();
+    
+    // Navigate immediately without waiting
     if (item === 'Projects') {
       scrollToSection('projects');
       return;
@@ -630,8 +644,12 @@ const Portfolio = () => {
             </MobileMenuButton>
           </Toolbar>
 
-          {/* Mobile Slide Down Menu */}
-          <Collapse in={mobileMenuOpen} timeout={300}>
+          {/* FIXED: Mobile Menu with conditional instant close */}
+          <Collapse 
+            in={mobileMenuOpen} 
+            timeout={isClosing ? 0 : 150}
+            unmountOnExit
+          >
             <MobileMenuContainer>
               <Container maxWidth="xl">
                 <MobileNavList>
@@ -640,8 +658,8 @@ const Portfolio = () => {
                       key={item}
                       onClick={() => handleNavItemClick(item)}
                       sx={{
-                        animationDelay: `${index * 100}ms`,
-                        animation: mobileMenuOpen ? 'slideInLeft 0.3s ease forwards' : 'none',
+                        // Remove animation delays that cause the sticky effect
+                        transition: 'all 0.2s ease',
                       }}
                     >
                       <MobileNavText>{item}</MobileNavText>
@@ -662,28 +680,40 @@ const Portfolio = () => {
 
                 <MobileSocialSection>
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('linkedin')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('linkedin');
+                    }}
                     aria-label="LinkedIn"
                   >
                     <LinkedInIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('github')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('github');
+                    }}
                     aria-label="GitHub"
                   >
                     <GitHubIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('instagram')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('instagram');
+                    }}
                     aria-label="Instagram"
                   >
                     <InstagramIcon sx={{ fontSize: 20 }} />
                   </MobileSocialButton>
                   
                   <MobileSocialButton
-                    onClick={() => handleSocialClick('twitter')}
+                    onClick={() => {
+                      closeMenuInstantly();
+                      handleSocialClick('twitter');
+                    }}
                     aria-label="Twitter"
                   >
                     <TwitterIcon sx={{ fontSize: 20 }} />
@@ -695,18 +725,11 @@ const Portfolio = () => {
         </Container>
       </StyledAppBar>
 
-      {/* Add keyframes for animations */}
+      {/* Simplified animations for instant response */}
       <style>
         {`
-          @keyframes slideInLeft {
-            from {
-              opacity: 0;
-              transform: translateX(-20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0);
-            }
+          .mobile-nav-item {
+            transition: background-color 0.2s ease, transform 0.2s ease !important;
           }
         `}
       </style>
