@@ -26,6 +26,22 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import SKLRImage from '../src/assets/Pictures/SKLR.jpg';
 import UniConnectImage from '../src/assets/Pictures/uniconnect.jpg';
 import OoredooImage from '../src/assets/Pictures/ooredoo.png';
+import c1Image from '../src/assets/Pictures/c1.png';
+import c2Image from '../src/assets/Pictures/c2.png';
+import c3Image from '../src/assets/Pictures/c3.png';
+import c4Image from '../src/assets/Pictures/c4.png';
+import c5Image from '../src/assets/Pictures/c5.png';
+import c6Image from '../src/assets/Pictures/c6.png';
+import c7Image from '../src/assets/Pictures/c7.png';
+
+// Import PDF certificates
+import cert1PDF from '../src/assets/Files/c1.pdf';
+import cert2PDF from '../src/assets/Files/c2.pdf';
+import cert3PDF from '../src/assets/Files/c3.pdf';
+import cert4PDF from '../src/assets/Files/c4.pdf';
+import cert5PDF from '../src/assets/Files/c5.pdf';
+import cert6PDF from '../src/assets/Files/C6.pdf';
+import cert7PDF from '../src/assets/Files/C7.pdf';
 
 // Styled Components for Navigation
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -58,6 +74,7 @@ const LogoText = styled(Typography)(({ theme }) => ({
   fontWeight: 800,
   letterSpacing: '-0.02em',
 }));
+
 const NavButton = styled(Button)(({ theme }) => ({
   color: theme.palette.text.primary,
   fontWeight: 500,
@@ -240,18 +257,18 @@ const PortfolioContainer = styled(Box)(({ theme }) => ({
 
 const PortfolioHeader = styled(Box)(({ theme }) => ({
   display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'flex-start',
-  marginBottom: '40px',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom: '60px',
+  textAlign: 'center',
   [theme.breakpoints.down('md')]: {
-    flexDirection: 'column',
-    gap: '20px',
-    alignItems: 'flex-start'
+    marginBottom: '40px',
   }
 }));
 
 const HeaderContent = styled(Box)({
-  flex: 1
+  maxWidth: '800px',
+  margin: '0 auto',
 });
 
 const RecentProjectsLabel = styled(Typography)({
@@ -404,6 +421,86 @@ const Portfolio = () => {
     }
   ];
 
+  const certificates = [
+    {
+      id: 1,
+      name: "Become a professional React Developer Specialization",
+      issuer: "Coursera",
+      year: "2024",
+      category: "Development",
+      description: "Validates expertise in designing distributed systems and applications on React FreamWork.",
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      image: c7Image,
+      pdfUrl: cert7PDF
+    },
+    {
+      id: 2,
+      name: "HTML, CSS, and Javascript for Web Developers",
+      issuer: "Coursera",
+      year: "2024",
+      category: "Web Development",
+      description: "Demonstrates proficiency in building modern web applications using HTML, CSS, JS and related technologies.",
+      gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+      image: c6Image,
+      pdfUrl: cert6PDF
+    },
+    {
+      id: 3,
+      name: "Create a Resume and Cover Letter with Word",
+      issuer: "Coursera",
+      year: "2022",
+      category: "Professional Skills",
+      description: "Certification in creating professional resumes and cover letters using Microsoft Word.",
+      gradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)",
+      image: c2Image,
+      pdfUrl: cert2PDF
+    },
+    {
+      id: 4,
+      name: "Full Stack Development with React and ASP.NET Core",
+      issuer: "Ooredoo",
+      year: "2023",
+      category: "Development",
+      description: "Certification in full stack development using React and ASP.NET Core technologies and frameworks to build modern web applications.",
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      image: c1Image,
+      pdfUrl: cert1PDF
+    },
+    {
+      id: 5,
+      name: "Getting Started with Microsoft PowerPoint",
+      issuer: "Coursera",
+      year: "2022",
+      category: "Presentation Skills",
+      description: "Certification in creating effective presentations using Microsoft PowerPoint.",
+      gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+      image: c3Image,
+      pdfUrl: cert3PDF
+    },
+    {
+      id: 6,
+      name: "Create a no-code responsive website with Webflow",
+      issuer: "Coursera",
+      year: "2022",
+      category: "Web Development",
+      description: "Certification in building responsive websites without coding using Webflow platform.",
+      gradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)",
+      image: c5Image,
+      pdfUrl: cert5PDF
+    },
+    {
+      id: 7,
+      name: "Use Canva to Create Desktop and Mobile-friendly Web Pages",
+      issuer: "Coursera",
+      year: "2022",
+      category: "Web Design",
+      description: "Certification in designing desktop and mobile-friendly web pages using Canva platform.",
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      image: c4Image,
+      pdfUrl: cert4PDF
+    }
+  ];
+
   const socialLinks = {
     github: "https://github.com/mohammadmasri9",
     linkedin: "https://linkedin.com/in/mohammad-almasri-5b606525a",
@@ -411,7 +508,7 @@ const Portfolio = () => {
     twitter: "https://twitter.com/your-twitter"
   };
 
-  const navItems = ['Home', 'Experience', 'About me', 'Portfolio'];
+  const navItems = ['Home', 'Experience', 'About me', 'Projects', 'Certifications'];
 
   const handleSocialClick = (platform) => {
     window.open(socialLinks[platform], '_blank', 'noopener,noreferrer');
@@ -420,9 +517,10 @@ const Portfolio = () => {
   const scrollToSection = (sectionId) => {
     if (sectionId === 'home') {
       window.location.href = '/';
-    } else if (sectionId === 'portfolio') {
-      // Stay on current page
-      return;
+    } else if (sectionId === 'projects') {
+      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+    } else if (sectionId === 'certifications') {
+      document.getElementById('certifications')?.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.location.href = `/#${sectionId}`;
     }
@@ -434,21 +532,23 @@ const Portfolio = () => {
   };
 
   const handleNavItemClick = (item) => {
-    if (item === 'Portfolio') {
-      // Stay on current page
+    if (item === 'Projects') {
+      scrollToSection('projects');
+      return;
+    } else if (item === 'Certifications') {
+      scrollToSection('certifications');
       return;
     } else {
       scrollToSection(
         item === 'Home' ? 'home' : 
         item === 'Experience' ? 'experience' : 
         item === 'About me' ? 'about' : 
-        'portfolio'
+        'projects'
       );
     }
   };
 
   const handleProjectClick = (project) => {
-    // Handle project click - could open modal, navigate to detail page, etc.
     console.log('Project clicked:', project.title);
   };
 
@@ -466,152 +566,17 @@ const Portfolio = () => {
     }
   };
 
+  const handleViewCertificate = (pdfUrl, e) => {
+    e.stopPropagation();
+    if (pdfUrl) {
+      window.open(pdfUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
   return (
     <Box>
-      {/* Navigation Bar */}
+        {/* Navigation Bar */}
       <StyledAppBar elevation={0}>
-        <Container maxWidth="xl">
-          <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
-            <LogoContainer onClick={() => scrollToSection('home')}>
-              <LogoText>MA</LogoText>
-              <Typography 
-                variant="h6" 
-                color="text.primary" 
-                fontWeight={600}
-                sx={{ 
-                  display: { xs: 'none', sm: 'block' },
-                  fontSize: '1.1rem'
-                }}
-              >
-                Mohammad Almasri
-              </Typography>
-            </LogoContainer>
-
-            {/* Desktop Navigation */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
-              {navItems.map((item) => (
-                <NavButton 
-                  key={item}
-                  onClick={() => handleNavItemClick(item)}
-                  sx={{
-                    backgroundColor: item === 'Portfolio' ? 'rgba(91, 61, 246, 0.08)' : 'transparent',
-                    color: item === 'Portfolio' ? '#5b3df6' : 'inherit'
-                  }}
-                >
-                  {item}
-                </NavButton>
-              ))}
-            </Box>
-
-            {/* Desktop Contact Button */}
-            <ContactButton 
-              variant="outlined"
-              sx={{ display: { xs: 'none', md: 'flex' } }}
-            >
-              Contact Me
-            </ContactButton>
-
-            {/* Mobile Menu Button */}
-            <MobileMenuButton
-              onClick={handleMobileMenuToggle}
-              isopen={mobileMenuOpen ? 1 : 0}
-              sx={{ display: { xs: 'flex', md: 'none' } }}
-            >
-              {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
-            </MobileMenuButton>
-          </Toolbar>
-
-          {/* Mobile Slide Down Menu */}
-          <Collapse in={mobileMenuOpen} timeout={300}>
-            <MobileMenuContainer>
-              <Container maxWidth="xl">
-                <MobileNavList>
-                  {navItems.map((item, index) => (
-                    <MobileNavItem
-                      key={item}
-                      onClick={() => handleNavItemClick(item)}
-                      sx={{
-                        animationDelay: `${index * 100}ms`,
-                        animation: mobileMenuOpen ? 'slideInLeft 0.3s ease forwards' : 'none',
-                        backgroundColor: item === 'Portfolio' ? 'rgba(91, 61, 246, 0.08)' : 'transparent',
-                      }}
-                    >
-                      <MobileNavText 
-                        sx={{ 
-                          color: item === 'Portfolio' ? '#5b3df6' : 'inherit',
-                          fontWeight: item === 'Portfolio' ? 600 : 500
-                        }}
-                      >
-                        {item}
-                      </MobileNavText>
-                    </MobileNavItem>
-                  ))}
-                </MobileNavList>
-
-                <Divider sx={{ borderColor: 'rgba(91, 61, 246, 0.1)' }} />
-
-                <MobileContactSection>
-                  <MobileContactButton variant="outlined">
-                    Contact Me
-                  </MobileContactButton>
-                </MobileContactSection>
-
-                <MobileSocialSection>
-                  <MobileSocialButton
-                    onClick={() => handleSocialClick('linkedin')}
-                    aria-label="LinkedIn"
-                  >
-                    <LinkedInIcon sx={{ fontSize: 20 }} />
-                  </MobileSocialButton>
-                  
-                  <MobileSocialButton
-                    onClick={() => handleSocialClick('github')}
-                    aria-label="GitHub"
-                  >
-                    <GitHubIcon sx={{ fontSize: 20 }} />
-                  </MobileSocialButton>
-                  
-                  <MobileSocialButton
-                    onClick={() => handleSocialClick('instagram')}
-                    aria-label="Instagram"
-                  >
-                    <InstagramIcon sx={{ fontSize: 20 }} />
-                  </MobileSocialButton>
-                  
-                  <MobileSocialButton
-                    onClick={() => handleSocialClick('twitter')}
-                    aria-label="Twitter"
-                  >
-                    <TwitterIcon sx={{ fontSize: 20 }} />
-                  </MobileSocialButton>
-                </MobileSocialSection>
-              </Container>
-            </MobileMenuContainer>
-          </Collapse>
-        </Container>
-      </StyledAppBar>
-
-      {/* Add keyframes for animations */}
-      <style>
-        {`
-          @keyframes slideInLeft {
-            from {
-              opacity: 0;
-              transform: translateX(-20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0);
-            }
-          }
-        `}
-      </style>
-
-      {/* Portfolio Content */}
-      <Box sx={{ bgcolor: '#f7fbff', minHeight: '100vh' }}>
-        <PortfolioContainer>
-          {/* Header Section */}
-         <StyledAppBar elevation={0}>
         <Container maxWidth="xl">
           <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
             <LogoContainer onClick={() => scrollToSection('home')}>
@@ -721,6 +686,48 @@ const Portfolio = () => {
         </Container>
       </StyledAppBar>
 
+      {/* Add keyframes for animations */}
+      <style>
+        {`
+          @keyframes slideInLeft {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        `}
+      </style>
+
+      {/* Portfolio Content */}
+      <Box sx={{ bgcolor: '#f7fbff', minHeight: '100vh' }}>
+        <PortfolioContainer id="projects">
+          {/* Header Section with Recent Projects Title */}
+          <PortfolioHeader>
+            <HeaderContent>
+              <RecentProjectsLabel>Portfolio</RecentProjectsLabel>
+              <PortfolioTitle>Recent Projects</PortfolioTitle>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#666', 
+                  fontSize: '16px', 
+                  lineHeight: '1.6',
+                  maxWidth: '600px',
+                  mt: 2,
+                  textAlign: 'center',
+                  mx: 'auto'
+                }}
+              >
+                A showcase of my latest work and technical achievements. Each project represents 
+                my passion for creating innovative solutions and learning new technologies.
+              </Typography>
+            </HeaderContent>
+          </PortfolioHeader>
+
           {/* Projects Grid */}
           <ProjectsGrid>
             {projects.map((project) => (
@@ -769,6 +776,185 @@ const Portfolio = () => {
               </ProjectCard>
             ))}
           </ProjectsGrid>
+
+          {/* Certifications Section */}
+          <Box sx={{ mt: 10 }} id="certifications">
+            {/* Certifications Header */}
+            <Box sx={{ mb: 6, textAlign: 'center' }}>
+              <Typography 
+                sx={{ 
+                  color: '#666',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  mb: 1
+                }}
+              >
+                Professional Development
+              </Typography>
+              <Typography 
+                variant="h2" 
+                sx={{ 
+                  fontSize: { xs: '36px', md: '48px' },
+                  fontWeight: '700',
+                  color: '#333',
+                  lineHeight: '1.2',
+                  mb: 2
+                }}
+              >
+                Certifications
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#666', 
+                  fontSize: '16px', 
+                  lineHeight: '1.6',
+                  maxWidth: '600px',
+                  mx: 'auto'
+                }}
+              >
+                Professional certifications and achievements that validate my expertise 
+                and commitment to continuous learning in technology.
+              </Typography>
+            </Box>
+
+            {/* Certifications Grid */}
+            <Box sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '24px',
+              [theme.breakpoints.down('md')]: {
+                gridTemplateColumns: '1fr',
+                gap: '20px'
+              }
+            }}>
+              {certificates.map((cert) => (
+                <Box
+                  key={cert.id}
+                  sx={{
+                    background: 'white',
+                    borderRadius: '16px',
+                    overflow: 'hidden',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.08)',
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                    cursor: 'pointer',
+                    '&:hover': {
+                      transform: 'translateY(-8px)',
+                      boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
+                    }
+                  }}
+                >
+                  {/* Certificate Image/Icon Container */}
+                  <Box sx={{
+                    height: '180px',
+                    background: cert.gradient || 'linear-gradient(135deg, #5b3df6 0%, #3b82f6 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '20px'
+                  }}>
+                    {cert.image ? (
+                      <img 
+                        src={cert.image} 
+                        alt={cert.name}
+                        style={{
+                          maxWidth: '100%',
+                          maxHeight: '100%',
+                          objectFit: 'contain',
+                          borderRadius: '8px'
+                        }}
+                      />
+                    ) : (
+                      <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        color: 'white',
+                        textAlign: 'center'
+                      }}>
+                        <Box sx={{
+                          width: 60,
+                          height: 60,
+                          borderRadius: '50%',
+                          backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          mb: 2
+                        }}>
+                          <Typography sx={{ fontSize: '24px', fontWeight: 'bold' }}>
+                            {cert.name.charAt(0)}
+                          </Typography>
+                        </Box>
+                        <Typography sx={{ fontSize: '14px', fontWeight: '500' }}>
+                          {cert.category}
+                        </Typography>
+                      </Box>
+                    )}
+                  </Box>
+
+                  {/* Certificate Content */}
+                  <Box sx={{ padding: '24px' }}>
+                    <Typography sx={{
+                      fontSize: '20px',
+                      fontWeight: '700',
+                      color: '#333',
+                      mb: 1,
+                      lineHeight: '1.3'
+                    }}>
+                      {cert.name}
+                    </Typography>
+
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 2 }}>
+                      <Typography sx={{
+                        color: '#5b3df6',
+                        fontSize: '14px',
+                        fontWeight: '600'
+                      }}>
+                        {cert.issuer}
+                      </Typography>
+                      <Typography sx={{
+                        color: '#666',
+                        fontSize: '14px'
+                      }}>
+                        • {cert.year}
+                      </Typography>
+                    </Box>
+
+                    {cert.description && (
+                      <Typography sx={{
+                        color: '#666',
+                        fontSize: '14px',
+                        lineHeight: '1.6',
+                        mb: 3
+                      }}>
+                        {cert.description}
+                      </Typography>
+                    )}
+
+                    <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <Box sx={{
+                        backgroundColor: 'rgba(91, 61, 246, 0.08)',
+                        color: '#5b3df6',
+                        padding: '4px 12px',
+                        borderRadius: '12px',
+                        fontSize: '12px',
+                        fontWeight: '500'
+                      }}>
+                        {cert.category}
+                      </Box>
+
+                      <ViewButton
+                        onClick={(e) => handleViewCertificate(cert.pdfUrl, e)}
+                      >
+                        View Certificate
+                      </ViewButton>
+                    </Box>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Box>
 
           {/* Call to Action Section */}
           <Box sx={{ textAlign: 'center', mt: 8 }}>
