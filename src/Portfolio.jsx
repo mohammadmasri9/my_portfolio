@@ -429,7 +429,7 @@ const Portfolio = () => {
       description: "A comprehensive web-based system designed to streamline the management of wedding halls, including booking, scheduling, and customer management.",
       image: WedImage,
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-      technologies: ['flutter', 'Node.js', 'Supabase', 'dart'],
+      technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'API', 'JavaScript'],
       status: 'Completed',
       demoUrl: '#',
       githubUrl: '#'
