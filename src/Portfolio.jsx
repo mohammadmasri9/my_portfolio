@@ -27,6 +27,7 @@ import SKLRImage from '../src/assets/Pictures/SKLR.jpg';
 import UniConnectImage from '../src/assets/Pictures/uniconnect.jpg';
 import OoredooImage from '../src/assets/Pictures/ooredoo.png';
 import WedImage from '../src/assets/Pictures/wed.jpg';
+import BotImage from '../src/assets/Pictures/Bot.png';
 
 import c1Image from '../src/assets/Pictures/c1.png';
 import c2Image from '../src/assets/Pictures/c2.png';
@@ -430,6 +431,17 @@ const Portfolio = () => {
       image: WedImage,
       gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
       technologies: ['React.js', 'Node.js', 'MongoDB', 'Express.js', 'API', 'JavaScript'],
+      status: 'Pending',
+      demoUrl: '#',
+      githubUrl: '#'
+    },
+     {
+      id: 5,
+      title: "Ooredoo HR Assistant Chatbot ",
+      description: "An AI-powered chatbot designed to assist employees with HR-related queries and tasks, providing quick and accurate responses.",
+      image: BotImage,
+      gradient: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
+      technologies: ['CopilotStudio', 'PowerAi', 'PromptTrgigger', 'PowerAutomate', 'PowerApps'],
       status: 'Completed',
       demoUrl: '#',
       githubUrl: '#'
