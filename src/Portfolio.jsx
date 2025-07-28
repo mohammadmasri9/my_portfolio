@@ -28,6 +28,7 @@ import UniConnectImage from '../src/assets/Pictures/uniconnect.jpg';
 import OoredooImage from '../src/assets/Pictures/ooredoo.png';
 import WedImage from '../src/assets/Pictures/wed.jpg';
 import BotImage from '../src/assets/Pictures/Bot.png';
+import TopImage from '../src/assets/Pictures/topcaffee.jpg';
 
 import c1Image from '../src/assets/Pictures/c1.png';
 import c2Image from '../src/assets/Pictures/c2.png';
@@ -446,6 +447,17 @@ const Portfolio = () => {
       demoUrl: '#',
       githubUrl: '#'
     },
+    {
+      id: 6,
+      title: "TopCaffee Menue ",
+      description: "A modern and user-friendly web application designed to showcase the menu of TopCaffee, a popular coffee shop.",
+      image: TopImage,
+      gradient: "linear-gradient(135deg, #d299c2 0%, #fef9d7 100%)",
+      technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'API'],
+      status: 'Completed',
+      demoUrl: '#',
+      githubUrl: '#'
+    }
   ];
 
   const certificates = [
