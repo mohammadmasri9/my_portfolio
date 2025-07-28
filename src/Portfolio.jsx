@@ -26,6 +26,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import SKLRImage from '../src/assets/Pictures/SKLR.jpg';
 import UniConnectImage from '../src/assets/Pictures/uniconnect.jpg';
 import OoredooImage from '../src/assets/Pictures/ooredoo.png';
+import WedImage from '../src/assets/Pictures/wed.jpg';
+
 import c1Image from '../src/assets/Pictures/c1.png';
 import c2Image from '../src/assets/Pictures/c2.png';
 import c3Image from '../src/assets/Pictures/c3.png';
@@ -33,6 +35,7 @@ import c4Image from '../src/assets/Pictures/c4.png';
 import c5Image from '../src/assets/Pictures/c5.png';
 import c6Image from '../src/assets/Pictures/c6.png';
 import c7Image from '../src/assets/Pictures/c7.png';
+
 
 // Import PDF certificates
 import cert1PDF from '../src/assets/Files/c1.pdf';
@@ -386,6 +389,7 @@ const Portfolio = () => {
   const [isClosing, setIsClosing] = React.useState(false);
 
   const projects = [
+   
     {
       id: 1,
       title: "SKLR",
@@ -418,7 +422,18 @@ const Portfolio = () => {
       status: 'Completed',
       demoUrl: '#',
       githubUrl: '#'
-    }
+    },
+     {
+      id: 4,
+      title: "Widding-Hall Management System",
+      description: "A comprehensive web-based system designed to streamline the management of wedding halls, including booking, scheduling, and customer management.",
+      image: WedImage,
+      gradient: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      technologies: ['flutter', 'Node.js', 'Supabase', 'dart'],
+      status: 'Completed',
+      demoUrl: '#',
+      githubUrl: '#'
+    },
   ];
 
   const certificates = [
