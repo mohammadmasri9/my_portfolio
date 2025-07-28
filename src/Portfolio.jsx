@@ -412,7 +412,7 @@ const Portfolio = () => {
       technologies: ['React', 'Node.js', 'MongoDb', 'API'],
       status: 'Completed',
       demoUrl: '#',
-      githubUrl: '#'
+      githubUrl: 'https://github.com/mohammadmasri9/UniConnect-'
     },
     {
       id: 3,
